@@ -134,10 +134,14 @@ public static class CellGameSetup
         root.AddComponent<ShopItemUI>();
 
         var nameGO  = MakeTMPLabel(root.transform, "NameLabel", "Item", 16);
-        SetAnchors(nameGO, 0, 0.5f, 0.45f, 1f); SetOffset(nameGO, 10, 0, 0, 0);
+        SetAnchors(nameGO, 0, 0.6f, 0.45f, 1f); SetOffset(nameGO, 10, 0, 0, 0);
+
+        var descGO  = MakeTMPLabel(root.transform, "DescLabel", "", 11);
+        SetAnchors(descGO, 0, 0.3f, 0.45f, 0.6f); SetOffset(descGO, 10, 0, 0, 0);
+        descGO.GetComponent<TextMeshProUGUI>().color = new Color(0.8f, 0.8f, 0.8f);
 
         var costGO  = MakeTMPLabel(root.transform, "CostLabel", "0", 13);
-        SetAnchors(costGO, 0, 0f, 0.45f, 0.5f); SetOffset(costGO, 10, 0, 0, 0);
+        SetAnchors(costGO, 0, 0f, 0.45f, 0.3f); SetOffset(costGO, 10, 0, 0, 0);
 
         var countGO = MakeTMPLabel(root.transform, "CountLabel", "x0", 13);
         SetAnchors(countGO, 0.45f, 0f, 0.65f, 1f);
@@ -151,6 +155,7 @@ public static class CellGameSetup
 
         var siuSO = new SerializedObject(root.GetComponent<ShopItemUI>());
         siuSO.FindProperty("nameLabel").objectReferenceValue  = nameGO.GetComponent<TextMeshProUGUI>();
+        siuSO.FindProperty("descLabel").objectReferenceValue  = descGO.GetComponent<TextMeshProUGUI>();
         siuSO.FindProperty("costLabel").objectReferenceValue  = costGO.GetComponent<TextMeshProUGUI>();
         siuSO.FindProperty("countLabel").objectReferenceValue = countGO.GetComponent<TextMeshProUGUI>();
         siuSO.FindProperty("buyButton").objectReferenceValue  = buyBtn;

@@ -365,7 +365,6 @@ public static class CellGameSetup
         AddIfMissing<ClickManager>(cellBtnGO);
         AddIfMissing<ClickFeedback>(cellBtnGO);
         AddIfMissing<SquishyCell>(cellBtnGO);
-        AddIfMissing<ProceduralCellTexture>(cellBtnGO);
 
         // FloatingTextSpawner
         var ftsGO = GetOrCreateChild(canvasGO, "FloatingTextSpawner");

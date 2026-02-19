@@ -25,7 +25,7 @@ public class ClickManager : MonoBehaviour
 
         floatingTextSpawner?.Spawn(gained);
         clickFeedback?.PlaySquish();
-        clickParticles?.Play();
+        if (clickParticles != null) clickParticles.Play();
         AudioSynth.Instance?.PlayClick();
 
         // Poke the squishy cell at a random edge point (if no pointer data available)

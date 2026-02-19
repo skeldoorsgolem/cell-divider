@@ -300,11 +300,11 @@ public static class CellGameSetup
         // Cell button
         var cellBtnGO = GetOrCreateChild(canvasGO, "CellButton");
         SetAnchors(cellBtnGO, 0.35f, 0.2f, 0.65f, 0.75f);
-        AddIfMissing<Image>(cellBtnGO).color = new Color(0, 0, 0, 0);
+        AddIfMissing<Image>(cellBtnGO);        // CellButtonVisual will set the sprite
+        AddIfMissing<CellButtonVisual>(cellBtnGO);
         AddIfMissing<Button>(cellBtnGO);
         AddIfMissing<ClickManager>(cellBtnGO);
         AddIfMissing<ClickFeedback>(cellBtnGO);
-        AddIfMissing<SquishyCell>(cellBtnGO);
 
         // FloatingTextSpawner
         var ftsGO = GetOrCreateChild(canvasGO, "FloatingTextSpawner");
@@ -351,7 +351,6 @@ public static class CellGameSetup
         var cmSO = new SerializedObject(cellBtnGO.GetComponent<ClickManager>());
         cmSO.FindProperty("floatingTextSpawner").objectReferenceValue = ftsGO.GetComponent<FloatingTextSpawner>();
         cmSO.FindProperty("clickFeedback").objectReferenceValue       = cellBtnGO.GetComponent<ClickFeedback>();
-        cmSO.FindProperty("squishyCell").objectReferenceValue         = cellBtnGO.GetComponent<SquishyCell>();
         cmSO.ApplyModifiedPropertiesWithoutUndo();
 
         // AudioSynth has no serialized fields — it self-initialises at runtime

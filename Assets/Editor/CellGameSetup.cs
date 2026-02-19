@@ -353,6 +353,14 @@ public static class CellGameSetup
         cmSO.FindProperty("clickFeedback").objectReferenceValue       = cellBtnGO.GetComponent<ClickFeedback>();
         cmSO.ApplyModifiedPropertiesWithoutUndo();
 
+        // Wire Button OnClick → ClickManager.OnCellButtonClicked
+        var btn = cellBtnGO.GetComponent<Button>();
+        btn.onClick.RemoveAllListeners();
+        var clickMgr = cellBtnGO.GetComponent<ClickManager>();
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(
+            btn.onClick,
+            clickMgr.OnCellButtonClicked);
+
         // AudioSynth has no serialized fields — it self-initialises at runtime
     }
 

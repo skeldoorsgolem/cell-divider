@@ -262,9 +262,8 @@ public static class CellGameSetup
         var smGO  = GetOrCreateChild(gmGO, "ShopManager");
         AddIfMissing<ShopManager>(smGO);
 
-        // AudioManager
+        // AudioManager — AudioSynth creates its own AudioSource at runtime
         var audioGO = GetOrCreate("AudioManager");
-        AddIfMissing<AudioSource>(audioGO);
         AddIfMissing<AudioSynth>(audioGO);
         AddIfMissing<AudioHooks>(audioGO);
 
@@ -350,10 +349,7 @@ public static class CellGameSetup
         cmSO.FindProperty("squishyCell").objectReferenceValue         = cellBtnGO.GetComponent<SquishyCell>();
         cmSO.ApplyModifiedPropertiesWithoutUndo();
 
-        // Wire AudioSynth
-        var asSO = new SerializedObject(audioGO.GetComponent<AudioSynth>());
-        asSO.FindProperty("audioSource").objectReferenceValue = audioGO.GetComponent<AudioSource>();
-        asSO.ApplyModifiedPropertiesWithoutUndo();
+        // AudioSynth has no serialized fields — it self-initialises at runtime
     }
 
     // ─── Helpers ──────────────────────────────────────────────────────────────

@@ -36,16 +36,13 @@ public static class CellGameSetup
     {
         foreach (var path in new[] { PrefabDir, SODir, SceneDir })
         {
-            var parts = path.Split('/');
-            var cur   = parts[0];
-            for (int i = 1; i < parts.Length; i++)
-            {
-                var next = cur + "/" + parts[i];
-                if (!AssetDatabase.IsValidFolder(next))
-                    AssetDatabase.CreateFolder(cur, parts[i]);
-                cur = next;
-            }
+            // Use System.IO to create the actual directory first,
+            // then refresh so Unity picks it up without needing CreateFolder
+            var fullPath = Application.dataPath + "/" + path.Substring("Assets/".Length);
+            if (!System.IO.Directory.Exists(fullPath))
+                System.IO.Directory.CreateDirectory(fullPath);
         }
+        AssetDatabase.Refresh();
     }
 
     // ─── Prefabs ──────────────────────────────────────────────────────────────

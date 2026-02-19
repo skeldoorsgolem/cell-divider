@@ -81,7 +81,6 @@ public static class CellGameSetup
         rt.sizeDelta = new Vector2(200, 200);
 
         root.AddComponent<TechNode>();
-        root.AddComponent<ProceduralNodeSprite>();
 
         // Button on root
         root.AddComponent<Button>();
@@ -118,11 +117,6 @@ public static class CellGameSetup
         so.FindProperty("costLabel").objectReferenceValue    = costGO.GetComponent<TextMeshProUGUI>();
         so.FindProperty("unlockButton").objectReferenceValue = prefab.GetComponent<Button>();
         so.ApplyModifiedPropertiesWithoutUndo();
-
-        // Wire ProceduralNodeSprite
-        var pnsSO = new SerializedObject(prefab.GetComponent<ProceduralNodeSprite>());
-        pnsSO.FindProperty("targetImage").objectReferenceValue = spriteImg;
-        pnsSO.ApplyModifiedPropertiesWithoutUndo();
 
         Object.DestroyImmediate(root);
         PrefabUtility.SavePrefabAsset(prefab);
